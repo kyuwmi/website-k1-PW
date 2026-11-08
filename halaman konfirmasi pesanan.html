@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan - Kantin YOUCB</title>
+    <style>
+        /* Pengaturan Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            color: #0f172a;
+        }
+
+        /* Navigasi Atas (Tombol Kembali) */
+        .navbar {
+            background-color: #2563eb;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-kembali {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-kembali:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar-title {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateX(-45px);
+            /* Menyeimbangkan posisi ke tengah */
+        }
+
+        /* Kotak Detail Pesanan */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+
+        /* Desain List Item Menu */
+        #daftar-pesanan {
+            margin-bottom: 20px;
+        }
+
+        .item-pesanan {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .item-nama {
+            font-weight: bold;
+            color: #334155;
+        }
+
+        .item-qty {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .item-harga {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        /* Total Harga Bawah */
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2563eb;
+            background-color: #eff6ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Tombol Konfirmasi */
+        .btn-konfirmasi {
+            display: block;
+            width: 100%;
+            background-color: #22c55e;
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .btn-konfirmasi:hover {
+            background-color: #16a34a;
+        }
+
+        /* Desain Kotak Sukses (Modal) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 350px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-box h2 {
+            color: #22c55e;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .btn-kembali-home {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-kembali-home:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigasi Atas -->
+    <div class="navbar">
+        <!-- Tombol Pojok Kiri Atas untuk Mengubah Pesanan -->
+        <a href="Tugas Kelompok.html" class="btn-kembali">❮ Ubah Pesanan</a>
+        <div class="navbar-title">Rincian Pembayaran</div>
+    </div>
+
+    <!-- Kotak Utama -->
+    <div class="container">
+        <h2>Menu yang Dipesan</h2>
+
+        <!-- Area tempat daftar menu dimunculkan otomatis oleh Javascript -->
+        <div id="daftar-pesanan">
+            <!-- Contoh HTML yang akan dicetak oleh JS:
+            <div class="item-pesanan">
+                <div>
+                    <div class="item-nama">Mie Ayam</div>
+                    <div class="item-qty">2 Porsi</div>
+                </div>
+                <div class="item-harga">Rp 16.000</div>
+            </div> 
+            -->
+        </div>
+
+        <div class="total-box">
+            <span>Total Akhir:</span>
+            <span id="teks-total-akhir">Rp 0</span>
+        </div>
+
+        <button class="btn-konfirmasi" id="btn-pesan-fix">Konfirmasi & Pesan</button>
+    </div>
+
+    <!-- Modal Sukses Jika Pesanan Sudah di Klik -->
+    <div class="modal-overlay" id="modal-sukses">
+        <div class="modal-box">
+            <h2>Pesanan Sukses! 🎉</h2>
+            <p>Terima kasih. Pesanan Anda sedang diproses oleh Kantin.</p>
+            <!-- Tombol ini berfungsi ganda sebagai footer/tutup yang otomatis kembali ke halaman utama -->
+            <a href="Tugas Kelompok.html" class="btn-kembali-home">Selesai & Kembali ke Utama</a>
+        </div>
+    </div>
+
+    <!-- Footer Standar -->
+    <footer>
+        <p>&copy; 2026 Canteen YOUCB. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        // Mengambil data pesanan yang disimpan dari Halaman Utama
+        const dataPesananJSON = localStorage.getItem('dataPesanan');
+        const dataTotalHarga = localStorage.getItem('totalHargaPesanan');
+
+        const divDaftarPesanan = document.getElementById('daftar-pesanan');
+        const teksTotalAkhir = document.getElementById('teks-total-akhir');
+
+        // Mengecek apakah ada data yang dikirim
+        if (dataPesananJSON && dataTotalHarga) {
+            // Ubah format JSON kembali menjadi objek Array Javascript
+            const daftarPesanan = JSON.parse(dataPesananJSON);
+
+            // Tampilkan total harga
+            teksTotalAkhir.innerText = "Rp " + parseInt(dataTotalHarga).toLocaleString('id-ID');
+
+            // Cetak (Looping) setiap menu yang dipesan ke dalam HTML
+            daftarPesanan.forEach(function (item) {
+                const elemenItem = document.createElement('div');
+                elemenItem.classList.add('item-pesanan');
+                elemenItem.innerHTML = `
+                    <div>
+                        <div class="item-nama">${item.nama}</div>
+                    </div>
+                    <div class="item-harga">Rp ${item.subtotal.toLocaleString('id-ID')}</div>
+                `;
+                divDaftarPesanan.appendChild(elemenItem);
+            });
+        } else {
+            // Jika masuk ke halaman ini tanpa memilih menu apa pun
+            divDaftarPesanan.innerHTML = '<p style="text-align:center; color:red;">Belum ada pesanan yang dipilih.</p>';
+        }
+
+        // Logika saat tombol "Konfirmasi & Pesan" di klik
+        document.getElementById('btn-pesan-fix').addEventListener('click', function () {
+            if (dataTotalHarga && parseInt(dataTotalHarga) > 0) {
+                // Munculkan pop-up sukses
+                document.getElementById('modal-sukses').style.display = 'flex';
+                // Hapus memori pesanan agar keranjang kosong kembali
+                localStorage.removeItem('dataPesanan');
+                localStorage.removeItem('totalHargaPesanan');
+            } else {
+                alert('Pesanan kosong! Silakan kembali dan pilih menu.');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

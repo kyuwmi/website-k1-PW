@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kantin Universitas Cahaya Bangsa</title>
+    <style>
+        /* Pengaturan Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(135deg, #f4f6f9 0%, #b0d7ff 100%);
+        }
+
+        /* Desain Kotak Login */
+        .login-card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            color: #1e293b;
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+        }
+
+        .login-card p {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* Desain Input Form */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            color: #475569;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            /* Agar padding tidak melebihi lebar kotak */
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Desain Tombol Masuk */
+        .btn-login {
+            width: 100%;
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h2>Kantin YOUCB</h2>
+        <p>Silakan masuk ke akun mahasiswa Anda</p>
+
+        <!-- Di sinilah kunci penghubungnya (action="Tugas Kelompok.html") -->
+        <form action="Tugas Kelompok.html" method="GET">
+
+            <div class="input-group">
+                <label for="username">NIM / Username</label>
+                <input type="text" id="username" placeholder="Masukkan NIM Anda" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan Password" required>
+            </div>
+
+            <button type="submit" class="btn-login">Masuk ke Kantin</button>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

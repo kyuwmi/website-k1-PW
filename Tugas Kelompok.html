@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Kelompok</title>
+
+  <!-- CSS -->
+  <style>
+    /* 1. Pengaturan Dasar Halaman */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* 2. Banner / Header Gambar Utama */
+    .banner-container {
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+      text-align: center;
+      background-color: #000;
+    }
+
+    .banner-container img {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      opacity: 1;
+    }
+
+    /* 3. Heading & Teks Utama */
+    h1 {
+      text-align: center;
+      color: #1e293b;
+      margin-top: 30px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      opacity: 0;
+      animation: fadeSlideIn 1s ease-out forwards;
+    }
+
+    /* fade in sambil geser turun */
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h3 {
+      /* Heading Pilih menu */
+      text-align: center;
+      color: #64748b;
+      font-weight: normal;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    h4 {
+      /* Heading Daftar Menu */
+      text-align: center;
+      color: #334155;
+      font-size: 1.3rem;
+      margin: 30px 0 20px 0;
+    }
+
+    /* 4. Desain Tabel & Slider */
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+    }
+
+    .table-container {
+      width: 100%;
+      max-width: 800px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+      background-color: #2563eb;
+      color: #ffffff;
+      padding: 14px 16px;
+      text-align: center;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .slider-viewport {
+      width: 100;
+      overflow: hidden;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      width: 100%;
+    }
+
+    .slide-page {
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+      align-items: center;
+      color: #475569;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      /* TAMBAHAN: Kursor berubah jadi tangan agar tahu bisa diklik */
+    }
+
+    .table-row:hover {
+      background-color: #b0d7ff;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .table-row img {
+      width: 100px;
+      height: 75px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* --- TAMBAHAN CSS UNTUK FITUR JAVASCRIPT --- */
+
+    /* Warna saat menu dipilih (Klik) */
+    .table-row.terpilih {
+      background-color: #dcfce3;
+      /* Hijau muda */
+      border-left: 5px solid #22c55e;
+      /* Garis penanda hijau */
+    }
+
+    /* Desain Kotak Total Harga */
+    .order-summary {
+      text-align: center;
+      margin: 0 auto 40px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      border: 2px dashed #cbd5e1;
+    }
+
+    .order-summary h3 {
+      margin: 0 0 15px 0;
+      color: #1e293b;
+    }
+
+    .btn-pesan {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-weight: bold;
+    }
+
+    .btn-pesan:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Desain Kotak Pesan (Modal Pop-up) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      /* Sembunyikan awalnya */
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-box {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-box h2 {
+      margin-top: 0;
+      color: #22c55e;
+    }
+
+    /* 5. LOGIKA SLIDER CSS-ONLY */
+    input[type="radio"] {
+      display: none;
+    }
+
+    .nav-btn {
+      background-color: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #475569;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .nav-btn:hover {
+      background-color: #f8fafc;
+      color: #2563eb;
+      border-color: #94a3b8;
+    }
+
+    .prev-1,
+    .prev-2,
+    .next-1,
+    .next-2 {
+      display: none;
+    }
+
+    #page-1:checked~.slider-wrapper .prev-1,
+    #page-1:checked~.slider-wrapper .next-1 {
+      display: flex;
+    }
+
+    #page-1:checked~.slider-wrapper .table-container .slider-viewport .slider-track {
+      transform: translateX(0%);
+    }
+
+    #page-2:checked~.slider-wrapper .prev-2,
+    #page-2:checked~.slider-wrapper .next-2 {
+      display: flex;
+    }
+
+    #page-2:checked~.slider-wrapper .table-container .slider-viewport .slider-track {
+      transform: translateX(-100%);
+    }
+
+    /* 6. Bagian Footer */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: #e2e8f0;
+      color: #475569;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin-bottom: 10px;
+      color: #475569;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 0;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Banner Gambar Kantin -->
+  <div class="banner-container">
+    <img src="kantin.jpg" alt="Kantin Universitas Cahaya Bangsa">
+  </div>
+
+  <!-- Judul & Deskripsi -->
+  <h1>Selamat datang di kantin Universitas Cahaya Bangsa</h1>
+  <h3>Pilih menu makan dan minuman dibawah untuk di pesan</h3>
+  <h4>Daftar Menu Kantin Universitas Cahaya Bangsa:</h4>
+
+  <!-- SLIDER CSS & TABEL -->
+  <div class="css-slider-container">
+
+    <!-- Radio Buttons pengatur halaman (tersembunyi) -->
+    <input type="radio" name="menu-slider" id="page-1" checked>
+    <input type="radio" name="menu-slider" id="page-2">
+
+    <div class="slider-wrapper">
+
+      <label for="page-2" class="nav-btn prev-1">❮</label>
+      <label for="page-1" class="nav-btn prev-2">❮</label>
+
+      <div class="table-container">
+        <div class="table-header">
+          <div>Gambar Menu</div>
+          <div>Nama Menu</div>
+          <div>Harga</div>
+        </div>
+
+        <div class="slider-viewport">
+          <div class="slider-track">
+
+            <!-- HALAMAN 1 -->
+            <div class="slide-page">
+              <div class="table-row">
+                <div><img src="mie ayam.jpeg" alt="Mie Ayam"></div>
+                <div>Mie Ayam</div>
+                <div>Rp 8.000</div>
+              </div>
+              <div class="table-row">
+                <div><img src="Nasi-Ayam-Geprek-Sambal.jpg" alt="Nasi Ayam Geprek"></div>
+                <div>Nasi Ayam Geprek</div>
+                <div>Rp 12.000</div>
+              </div>
+              <div class="table-row">
+                <div><img src="bakso" alt="Bakso"></div>
+                <div>Bakso</div>
+                <div>Rp 10.000</div>
+              </div>
+            </div>
+
+            <!-- HALAMAN 2 -->
+            <div class="slide-page">
+              <div class="table-row">
+                <div><img src="es teh.png" alt="Es Teh Manis"></div>
+                <div>Es Teh Manis</div>
+                <div>Rp 4.000</div>
+              </div>
+              <div class="table-row">
+                <div><img src="Nasi-Goreng-telor.jpg" alt="Nasi Goreng"></div>
+                <div>Nasi Goreng</div>
+                <div>Rp 15.000</div>
+              </div>
+              <div class="table-row">
+                <div><img src="soto ayam.webp" alt="Soto Ayam"></div>
+                <div>Soto Ayam</div>
+                <div>Rp 13.000</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <label for="page-2" class="nav-btn next-1">❯</label>
+      <label for="page-1" class="nav-btn next-2">❯</label>
+
+    </div>
+  </div>
+
+  <!-- AREA BARU: Ringkasan Pesanan & Tombol Pesan -->
+  <div class="order-summary">
+    <h3>Total Pesanan: <span id="teks-total">Rp 0</span></h3>
+    <button class="btn-pesan" id="tombol-pesan">Pesan Sekarang</button>
+  </div>
+
+  <!-- AREA BARU: Kotak Notifikasi / Modal Popup (Tersembunyi Awalnya) -->
+  <div class="modal-overlay" id="modal-notifikasi">
+    <div class="modal-box">
+      <h2 id="judul-notifikasi">Oops!</h2>
+      <p id="pesan-notifikasi">Pilih minimal satu menu terlebih dahulu ya!</p>
+      <button class="btn-pesan" id="tombol-tutup-modal" style="margin-top: 15px;">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Canteen YOUCB. Hak Cipta Dilindungi.</p>
+    <ul>
+      <li><a href="#about">Tentang Kami</a></li>
+      <li><a href="https://www.instagram.com/abiyyu_dex?stkn=MWRnZHc1bnBiOGZ6cg==" target="_blank">Kontak</a></li>
+      <!-- Tambahan tombol keluar yang terhubung kembali ke file login -->
+      <li><a href="login.html" style="color: #ef4444;">Keluar (Logout)</a></li>
+    </ul>
+  </footer>
+
+  <!-- SCRIPT JAVASCRIPT UNTUK FITUR PILIH MENU & MENGIRIM DATA KE KONFIRMASI.HTML -->
+  <script>
+    // 1. Menyiapkan Memori (Variabel)
+    let totalHarga = 0; // Mulai dari Rp 0
+    const teksTotalElement = document.getElementById('teks-total'); // Mengambil teks 'Rp 0' di layar
+    const daftarMenu = document.querySelectorAll('.table-row'); // Mengambil semua baris makanan
+
+    // 2. Menambahkan aksi saat baris menu di-klik
+    daftarMenu.forEach(function (menu) {
+      menu.addEventListener('click', function () {
+
+        // A. Mengambil teks harga dari kolom ke-3 (index ke-2)
+        const teksHarga = menu.children[2].innerText;
+
+        // B. Membersihkan tulisan "Rp" dan titik. Contoh "Rp 12.000" jadi "12000" (Angka murni)
+        const angkaHarga = parseInt(teksHarga.replace(/[^0-9]/g, ''));
+
+        // C. Logika Ceklis (Batal atau Pilih)
+        if (menu.classList.contains('terpilih')) {
+          // Jika diklik lagi, batalkan pilihan (kurangi harga, hapus warna)
+          menu.classList.remove('terpilih');
+          totalHarga = totalHarga - angkaHarga;
+        } else {
+          // Jika dipilih, tambah harga dan ubah warna jadi hijau
+          menu.classList.add('terpilih');
+          totalHarga = totalHarga + angkaHarga;
+        }
+
+        // D. Ubah tulisan total harga di layar (tambahkan format Rp)
+        teksTotalElement.innerText = "Rp " + totalHarga.toLocaleString('id-ID');
+      });
+    });
+
+    // 3. Logika untuk Tombol Pesan (Mengirim Data ke Halaman Konfirmasi)
+    const tombolPesan = document.getElementById('tombol-pesan');
+    const modalNotifikasi = document.getElementById('modal-notifikasi');
+    const tombolTutupModal = document.getElementById('tombol-tutup-modal');
+
+    // Jika tombol "Pesan Sekarang" di-klik
+    tombolPesan.addEventListener('click', function () {
+      if (totalHarga === 0) {
+        // Jika belum pesan apa-apa, munculkan pesan error
+        modalNotifikasi.style.display = 'flex';
+      } else {
+        // PROSES PENGUMPULAN DATA PESANAN
+        let keranjangPesanan = [];
+
+        // Cek setiap baris menu
+        daftarMenu.forEach(function (menu) {
+          // Hanya ambil menu yang punya class 'terpilih' (warna hijau)
+          if (menu.classList.contains('terpilih')) {
+            // Ambil Nama Menu (kolom ke-2 / index ke-1)
+            const namaMenu = menu.children[1].innerText;
+
+            // Ambil Harga 
+            const teksHarga = menu.children[2].innerText;
+            const angkaHarga = parseInt(teksHarga.replace(/[^0-9]/g, ''));
+
+            // Masukkan ke dalam memori keranjang (karena sistem klik, porsi selalu 1)
+            keranjangPesanan.push({
+              nama: namaMenu,
+              porsi: 1,
+              subtotal: angkaHarga
+            });
+          }
+        });
+
+        // Simpan data keranjang dan total harga ke LocalStorage browser
+        localStorage.setItem('dataPesanan', JSON.stringify(keranjangPesanan));
+        localStorage.setItem('totalHargaPesanan', totalHarga);
+
+        // Langsung arahkan (pindah) pengguna ke Halaman 3 (konfirmasi.html)
+        window.location.href = "halaman konfirmasi pesanan.html";
+      }
+    });
+
+    // Jika tombol "Tutup" di-klik, sembunyikan kotak notifikasi error
+    tombolTutupModal.addEventListener('click', function () {
+      modalNotifikasi.style.display = 'none';
+    });
+
+  </script>
+
+</body>
+
+</html>
